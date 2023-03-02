@@ -27,6 +27,10 @@ class Pokedex extends React.Component {
     }));
   }
 
+  // handleClickFilter() {
+    
+  // }
+
   render() {
     const { pokemonIndex } = this.state;
     const { pokemonList } = this.props;
@@ -35,7 +39,9 @@ class Pokedex extends React.Component {
         <h1> Pokédex </h1>
         <div className="pokedex">
           <Pokemon pokemon={ pokemonList[pokemonIndex] } />
-          <button onClick={ this.handleClick }>Próximo pokemon</button>
+          <button onClick={ this.handleClick }>Próximo pokémon</button>
+          {/* <button onClick={handleClickFilter}>Fire</button>
+          <button onClick={handleClickFilter}>Psychic</button> */}
           {/* { pokemonList
             .map((pokemon) => <Pokemon key={ pok  emon.id } pokemon={ pokemon } />) } */
           }
