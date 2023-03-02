@@ -10,8 +10,10 @@ class Pokedex extends React.Component {
 
     this.state = {
       pokemonIndex: 0,
+      // typeFiltered: '',
     };
     this.handleClick = this.handleClick.bind(this);
+    // this.handleClickFilter = this.handleClickFilter.bind(this);
   }
 
   handleClick() {
@@ -27,8 +29,13 @@ class Pokedex extends React.Component {
     }));
   }
 
-  // handleClickFilter() {
-    
+  // handleClickFilter({ target }) {
+  //   const { pokemonList } = this.props;
+  //   const { typeFiltered } = this.state;
+
+  //   this.setState(() => ({
+  //     typeFiltered: pokemonList.find((pokemon) => pokemon.type === 'Fire').type,
+  //   }));
   // }
 
   render() {
@@ -39,9 +46,9 @@ class Pokedex extends React.Component {
         <h1> Pokédex </h1>
         <div className="pokedex">
           <Pokemon pokemon={ pokemonList[pokemonIndex] } />
+          {/* <button onClick={ this.handleClickFilter }>Fire</button>
+          <button onClick={ this.handleClickFilter }>Psychic</button> */}
           <button onClick={ this.handleClick }>Próximo pokémon</button>
-          {/* <button onClick={handleClickFilter}>Fire</button>
-          <button onClick={handleClickFilter}>Psychic</button> */}
           {/* { pokemonList
             .map((pokemon) => <Pokemon key={ pok  emon.id } pokemon={ pokemon } />) } */
           }
