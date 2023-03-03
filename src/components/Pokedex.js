@@ -9,11 +9,12 @@ class Pokedex extends React.Component {
 
     this.state = {
       pokemonIndex: 0,
-      typeFiltered: '',
       renderedList: pokemonList,
     };
+
     this.handleClick = this.handleClick.bind(this);
     this.handleClickFilter = this.handleClickFilter.bind(this);
+    this.resetListState = this.resetListState.bind(this);
   }
 
   handleClick() {
@@ -29,11 +30,14 @@ class Pokedex extends React.Component {
   }
 
   handleClickFilter(type) {
-    const { typeFiltered, renderedList } = this.state;
-
     this.setState(() => ({
-      [typeFiltered]: type,
-      renderedList: renderedList.filter((pokemon) => pokemon.type === type),
+      renderedList: pokemonList.filter((pokemon) => pokemon.type.includes(type)),
+    }));
+  }
+
+  resetListState() {
+    this.setState(() => ({
+      renderedList: pokemonList,
     }));
   }
 
@@ -46,6 +50,7 @@ class Pokedex extends React.Component {
           <Pokemon pokemon={ renderedList[pokemonIndex] } />
           <button onClick={ () => this.handleClickFilter('Fire') }>Fire</button>
           <button onClick={ () => this.handleClickFilter('Psychic') }>Psychic</button>
+          <button onClick={ this.resetListState }>All</button>
           <button onClick={ this.handleClick }>Próximo pokémon</button>
         </div>
       </>
