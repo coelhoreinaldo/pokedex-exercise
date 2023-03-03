@@ -1,8 +1,7 @@
 import React from 'react';
-import { arrayOf } from 'prop-types';
 
 import Pokemon from './Pokemon';
-import { pokemonType } from '../types';
+import pokemonList from '../data';
 
 class Pokedex extends React.Component {
   constructor() {
@@ -10,16 +9,16 @@ class Pokedex extends React.Component {
 
     this.state = {
       pokemonIndex: 0,
-      // typeFiltered: '',
+      typeFiltered: '',
+      renderedList: pokemonList,
     };
     this.handleClick = this.handleClick.bind(this);
-    // this.handleClickFilter = this.handleClickFilter.bind(this);
+    this.handleClickFilter = this.handleClickFilter.bind(this);
   }
 
   handleClick() {
-    const { pokemonIndex } = this.state;
-    const { pokemonList } = this.props;
-    if (pokemonIndex === pokemonList.length - 1) {
+    const { pokemonIndex, renderedList } = this.state;
+    if (pokemonIndex === renderedList.length - 1) {
       this.setState(() => ({
         pokemonIndex: -1,
       }));
@@ -29,41 +28,29 @@ class Pokedex extends React.Component {
     }));
   }
 
-  // handleClickFilter({ target }) {
-  //   const { pokemonList } = this.props;
-  //   const { typeFiltered } = this.state;
+  handleClickFilter(type) {
+    const { typeFiltered, renderedList } = this.state;
 
-  //   this.setState(() => ({
-  //     typeFiltered: pokemonList.find((pokemon) => pokemon.type === 'Fire').type,
-  //   }));
-  // }
+    this.setState(() => ({
+      [typeFiltered]: type,
+      renderedList: renderedList.filter((pokemon) => pokemon.type === type),
+    }));
+  }
 
   render() {
-    const { pokemonIndex } = this.state;
-    const { pokemonList } = this.props;
+    const { pokemonIndex, renderedList } = this.state;
     return (
       <>
         <h1> Pokédex </h1>
         <div className="pokedex">
-          <Pokemon pokemon={ pokemonList[pokemonIndex] } />
-          {/* <button onClick={ this.handleClickFilter }>Fire</button>
-          <button onClick={ this.handleClickFilter }>Psychic</button> */}
+          <Pokemon pokemon={ renderedList[pokemonIndex] } />
+          <button onClick={ () => this.handleClickFilter('Fire') }>Fire</button>
+          <button onClick={ () => this.handleClickFilter('Psychic') }>Psychic</button>
           <button onClick={ this.handleClick }>Próximo pokémon</button>
-          {/* { pokemonList
-            .map((pokemon) => <Pokemon key={ pok  emon.id } pokemon={ pokemon } />) } */
-          }
         </div>
       </>
     );
   }
 }
-
-Pokedex.defaultProps = {
-  pokemonList: [],
-};
-
-Pokedex.propTypes = {
-  pokemonList: arrayOf(pokemonType),
-};
 
 export default Pokedex;

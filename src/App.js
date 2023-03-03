@@ -5,12 +5,23 @@ import Pokedex from './components/Pokedex';
 
 import pokemonList from './data';
 
-function App() {
-  return (
-    <div className="App">
-      <Pokedex pokemonList={ pokemonList } />
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      list: pokemonList,
+    };
+  }
+
+  render() {
+    const { list } = this.state;
+    return (
+      <div className="App">
+        <Pokedex list={ list } />
+      </div>
+    );
+  }
 }
 
 export default App;
