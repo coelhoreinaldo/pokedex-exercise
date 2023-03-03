@@ -2,6 +2,7 @@ import React from 'react';
 
 import Pokemon from './Pokemon';
 import pokemonList from '../data';
+import Button from './Button';
 
 class Pokedex extends React.Component {
   constructor() {
@@ -50,10 +51,26 @@ class Pokedex extends React.Component {
         <h1> Pokédex </h1>
         <div className="pokedex">
           <Pokemon pokemon={ renderedList[pokemonIndex] } />
-          <button onClick={ () => this.handleClickFilter('Fire') }>Fire</button>
-          <button onClick={ () => this.handleClickFilter('Psychic') }>Psychic</button>
-          <button onClick={ this.resetListState }>All</button>
-          <button onClick={ this.handleClick }>Próximo pokémon</button>
+          <Button
+            onClick={ () => this.resetListState() }
+          >
+            All
+          </Button>
+          <Button
+            onClick={ () => this.handleClickFilter('Fire') }
+          >
+            Fire
+          </Button>
+          <Button
+            onClick={ () => this.handleClickFilter('Psychic') }
+          >
+            Psychic
+          </Button>
+          <Button
+            onClick={ () => this.handleClick() }
+          >
+            Próximo pokémon
+          </Button>
         </div>
       </>
     );
