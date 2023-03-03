@@ -31,12 +31,14 @@ class Pokedex extends React.Component {
 
   handleClickFilter(type) {
     this.setState(() => ({
+      pokemonIndex: 0,
       renderedList: pokemonList.filter((pokemon) => pokemon.type.includes(type)),
     }));
   }
 
   resetListState() {
     this.setState(() => ({
+      pokemonIndex: 0,
       renderedList: pokemonList,
     }));
   }
