@@ -13,12 +13,12 @@ class Pokedex extends React.Component {
       renderedList: pokemonList,
     };
 
-    this.handleClick = this.handleClick.bind(this);
-    this.handleClickFilter = this.handleClickFilter.bind(this);
+    this.nextPokemon = this.nextPokemon.bind(this);
+    this.filterPokemon = this.filterPokemon.bind(this);
     this.resetListState = this.resetListState.bind(this);
   }
 
-  handleClick() {
+  nextPokemon() {
     const { pokemonIndex, renderedList } = this.state;
     if (pokemonIndex === renderedList.length - 1) {
       this.setState(() => ({
@@ -30,7 +30,7 @@ class Pokedex extends React.Component {
     }));
   }
 
-  handleClickFilter(type) {
+  filterPokemon(type) {
     this.setState(() => ({
       pokemonIndex: 0,
       renderedList: pokemonList.filter((pokemon) => pokemon.type.includes(type)),
@@ -46,28 +46,28 @@ class Pokedex extends React.Component {
 
   render() {
     const { pokemonIndex, renderedList } = this.state;
+    const types = pokemonList.reduce((acc, { type }) => {
+      if (!acc.includes(type)) {
+        acc.push(type);
+      }
+      return acc;
+    }, []);
     return (
       <>
         <h1> Pokédex </h1>
         <div className="pokedex">
           <Pokemon pokemon={ renderedList[pokemonIndex] } />
+          { types.map((type) => (
+            <Button key={ type } onClick={ () => this.filterPokemon(type) }>
+              { type }
+            </Button>))}
           <Button
-            onClick={ () => this.resetListState() }
+            onClick={ this.resetListState }
           >
             All
           </Button>
           <Button
-            onClick={ () => this.handleClickFilter('Fire') }
-          >
-            Fire
-          </Button>
-          <Button
-            onClick={ () => this.handleClickFilter('Psychic') }
-          >
-            Psychic
-          </Button>
-          <Button
-            onClick={ () => this.handleClick() }
+            onClick={ this.nextPokemon }
           >
             Próximo pokémon
           </Button>
