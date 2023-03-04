@@ -1,4 +1,4 @@
-# :construction: Pokedex Exercise ! :construction:
+# ⚛️ Pokedex Exercise 
 
 Exercício de uso de states em React.
 
